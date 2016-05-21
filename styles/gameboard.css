@@ -5,6 +5,8 @@
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
+   border:10px solid white;
+  margin:20px;
 }
 
 #red{
@@ -14,6 +16,8 @@
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
+   border:10px solid white;
+  margin:20px;
 }
 
 #blue{
@@ -23,6 +27,8 @@
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
+   border:10px solid white;
+  margin:20px;
 }
 
 #yellow{
@@ -32,16 +38,13 @@
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
+   border:10px solid white;
+  margin:20px;
 }
 
 #gameboard{
-
-   background-repeat: repeat;
-    background-position: right top;
-    background-attachment: fixed;
-  width:80%;
-  height:600px;
-  float:right;
+  float:left;
+  margin-top:40px;
   
 }
 
@@ -53,13 +56,30 @@
 #media{
   display:none;
   clear:both;
+  margin:0 auto;
+  width:200px;
 }
 
 #share{
   display:block;
   clear:both;
+  margin:0 auto;
+  width:200px;
+  font-family:cursive;
+  background-color:red;
 }
-
+#facebook{
+  margin:10px;
+  color: red;
+  font-family:cursive;
+  background-color:blue;
+}
+#twitter{
+  margin:20px;
+  color:blue;
+  font-family:cursive;
+    background-color:purple;
+}
 
 body {
   background-color:black;
@@ -69,8 +89,7 @@ body {
    cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-red.png"), auto;
 }
 .yellowspraycan{
-   cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-yellow.png"), auto;
-}
+   cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-yellow.png"), auto;} 
 .bluespraycan{
    cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-blue.png"), auto;
 }
