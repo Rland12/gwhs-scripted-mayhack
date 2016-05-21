@@ -51,3 +51,8 @@ text-shadow: 5px 3px orange;
   margin-left:25%;
   margin-right:25%;
 }
+
+#pano{
+    width:640px;
+    height:480px;
+}
