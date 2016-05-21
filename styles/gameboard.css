@@ -1,3 +1,15 @@
+#ball{
+  width: 10%;
+  float:left;
+}
+h1{
+  font-size:89px;
+  text-shadow: 6px 1px turquoise;
+ float:right;
+  width:90%;
+  margin-top:-10px;
+
+}
 #green{
   width: 100px;
 	height: 100px;

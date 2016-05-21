@@ -1,13 +1,10 @@
 body{
   background: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/07/graffiti_art_wallpaper.jpg");
   font-family: 'Kaushan Script', cursive;
-  height: 100%;
-  margin: 0;
-  padding: 0;
 }
+
 #ball{
   width: 10%;
-  
   float:left;
 }
 h1{
@@ -15,27 +12,42 @@ h1{
   text-shadow: 6px 1px turquoise;
  float:right;
   width:90%;
+  margin-top:-10px;
+
 }
 
 h2{
  color: white;
   font-size:89px;
   text-shadow: 8px 2px #cc3300;
+  clear:none;
+
 }
 input{
   font-size:30px;
 }
 #enter{
-  color:white;
+  font-family: 'Kaushan Script', cursive;
+  color:black;
+    font-size:30px;
   border-radius: 12px;
-  background-color: #0000cc;
+  background-color: green;
+    transition: 0.5s;
 }
 #game{
-  font-size:40px;
+  margin-top:20px;
+  font-size:30px;
    border-radius: 12px;
   background-color: #99ff33;
+  font-family: 'Kaushan Script', cursive;
+    transition: 0.5s;
 }
-#pano {
-    width: 640px;
-    height:400px;
+
+#game:hover, #enter:hover{
+    font-size:35px;
+text-shadow: 5px 3px orange;
+}
+#center{
+  margin-left:25%;
+  margin-right:25%;
 }

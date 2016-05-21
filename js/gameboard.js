@@ -55,6 +55,7 @@ function imageInput (imageUrl, canvas){
   };  
   // setting the empty image to an image 
   myImage.src = imageUrl;
+  //prevents the image from stretching out 
   myImage.width = "640px";
   myImage.height = "480px";
 }
@@ -66,7 +67,7 @@ function setRed(){
 }
 // just turn it green 
 function setGreen(){
-  color = "#00ff40";
+  color = "#009933";
 }
 // just turn it blue
 function setBlue(){
@@ -76,27 +77,31 @@ function setBlue(){
 function setYellow(){
   color = "#ffff00";
 }
-// unfinished
+// x-axis and y-axis; draws circle at that position
 function drawCircle(x, y){
-  
+  // if x & y doesnt exist, get out of the function
   if (! x || ! y){
     console.log("Don't know where to go.");
     return false;
   } 
-  
+  // canvas into the variable target
   var target = getCanvas();
+  // assinging 2d to context 
   var context = target.getContext("2d");
+  // shape that your drawing
   context.beginPath();
   var radius = 5; // the size is the radius in pixels    
   var start = 0; 
   var end = Math.PI*2;
   context.arc(x, y, radius, start, end);
+  //calling the varible to the colors
   context.fillStyle = color;
+  // filling the circles 
   context.fill();
-  console.log("Anything");
 }
+//
 function drawing (){
-$('#gameboard').click(function(event){
+$('#gameboard').mousemove(function(event){
   var offset = $("#gameboard").offset();
   var left = event.pageX - offset.left;
   var top = event.pageY - offset.top;
