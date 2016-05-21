@@ -1,6 +1,91 @@
-body{
-    background-color:blue;
+#green{
+  width: 100px;
+	height: 100px;
+	background: green;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
 }
+
+#red{
+  width: 100px;
+	height: 100px;
+	background: red;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+#blue{
+  width: 100px;
+	height: 100px;
+	background: blue;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+#yellow{
+  width: 100px;
+	height: 100px;
+	background: yellow;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+#gameboard{
+
+   background-repeat: repeat;
+    background-position: right top;
+    background-attachment: fixed;
+  width:80%;
+  height:600px;
+  float:right;
+  
+}
+
+#colors{
+  float:left;
+  width:20%;
+ 
+}
+#media{
+  display:none;
+  clear:both;
+}
+
+#share{
+  display:block;
+  clear:both;
+}
+
+
+body {
+  background-color:black;
+}
+
+.redspraycan{
+   cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-red.png"), auto;
+}
+.yellowspraycan{
+   cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-yellow.png"), auto;
+}
+.bluespraycan{
+   cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-blue.png"), auto;
+}
+.greenspraycan{
+   cursor: url("https://dl.dropboxusercontent.com/u/88121919/images/spray-can-img/spray-can-green.png"), auto;
+}
+p{
+  font-family:'Kaushan Script', cursive;
+  color:white;
+}
+h1{
+  font-family:'Kaushan Script', cursive;
+  color:white;
+}
+
 #song{
     display:none;
 }
