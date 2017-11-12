@@ -1,6 +1,7 @@
 body{
   background: url("http://www.siwallpaperhd.com/wp-content/uploads/2015/07/graffiti_art_wallpaper.jpg");
   font-family: 'Kaushan Script', cursive;
+  background-size:cover;
 }
 
 #ball{

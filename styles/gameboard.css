@@ -80,17 +80,32 @@ h1{
   font-family:cursive;
   background-color:red;
 }
-#facebook{
-  margin:10px;
-  color: red;
-  font-family:cursive;
-  background-color:blue;
+/* Style all font awesome icons */
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
 }
-#twitter{
-  margin:20px;
-  color:blue;
-  font-family:cursive;
-    background-color:purple;
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
 }
 
 body {

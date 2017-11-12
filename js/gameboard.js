@@ -108,19 +108,3 @@ $('#gameboard').mousemove(function(event){
   drawCircle(left, top);
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
