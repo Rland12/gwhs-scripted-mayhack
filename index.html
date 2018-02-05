@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-        <title>Home</title>
-          <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-        <link rel="stylesheet" href="styles/home.css" type="text/css">
-   <script type="text/javascript" src="js/home.js"></script>
-   <script type="text/javascript" src="js/mapapi.js"></script>
-    </head>
-    
-<body>
-  <div id="center">   
-  <img id ="ball" src ="http://www.thisiscolossal.com/wp-content/uploads/2014/03/130407.gif">
-  
-  <h1><span style ="color:red">Paint</span> <span style="color:purple">the</span> <span style ="color:blue">City</span> </h1>
-  
-  
-  <h2>Enter Location:<h2>
-   
-     <form>
-    <input id="place" type="Location" placeholder="Location">
-    
-    <button id="enter" type="submit">Submit</button>
-  
-  </form>
-    <div id="pano"> </div>
-     
-    <button id="game" name="start" type="submit" value="game">Preview</button>
-    <div>
-      <img id='img'>
-      <a id="go" href="">Go to game</a>
+  <head>
+    <title>Paint the city</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/home.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="center">   
+      <img id ="ball" src ="http://www.thisiscolossal.com/wp-content/uploads/2014/03/130407.gif" />
+      
+      <h1>
+        <span style ="color:red">Paint</span>
+        <span style="color:purple">the</span>
+        <span style ="color:blue">City</span>
+      </h1>
+
+      <h2>Enter Location:<h2>
+      <form>
+        <input id="place" type="Location" placeholder="Location">
+        <button id="enter" type="submit">Submit</button>
+      </form>
+      
+      <div id="pano"></div>
+      
+      <button id="game" name="start" type="submit" value="game">Preview</button>
+
+      <div>
+        <img id='img' />
+        <a id="go" href="">Go to game</a>
+      </div>
     </div>
-    </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script type="text/javascript" src="js/mapapi.js"></script>
 </body>
 </html>

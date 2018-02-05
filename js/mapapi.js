@@ -1,59 +1,82 @@
-var fenway;
-var panorama;
+function googleMapWrapper(imageId) {
+  this.imageId = imageId;
+
+  this.googleMapsApiKey = 'AIzaSyCwLY1vDNFqYUY7eSj4kTVwiuW1-XZC55U';
+  this.googleApiGeocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+  this.googleMapDisplay = document.getElementById('pano')
+  
+  this.position;
+  this.screenShot = {
+    height: '640',
+    width: '400',
+
+    shots: [],
+    url: '',
+    
+    location: '',
+    heading: '',
+    pitch: '',
+    fov: '',
+  }
+  this.panorama;
+  
+  this.assignPosition = function(position) {
+    this.position = position;
+    return this.renderGoogleMap();
+  }
+
+  this.renderGoogleMap = function() {
+    var googleMapScriptTag = document.createElement('script');
+    googleMapScriptTag.type = 'text/javascript';
+    googleMapScriptTag.async = true;
+    googleMapScriptTag.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.googleMapsApiKey +'&callback=map.initialize';
+    
+    return document.getElementsByTagName('body')[0].appendChild(googleMapScriptTag);
+  }
+
+  this.initialize = function() {
+    const panorama = new google.maps.StreetViewPanorama(
+      this.googleMapDisplay,
+      {
+        position: this.position
+      }
+    );
+    this.screenShot.location = panorama.position.lat() + "," + panorama.position.lng();
+    // special equation for fov to zoom ratio for the 'fov'
+    this.screenShot.fov = 103.7587 * Math.pow(0.5051, panorama.pov.zoom);
+    this.screenShot.heading = panorama.pov.heading;
+    this.screenShot.pitch = panorama.pov.pitch;
+  }
+
+  this.getNew
+
+  this.takeScreenShot = function() {
+    this.screenShot.url = "https://maps.googleapis.com/maps/api/streetview?size=" + this.screenShot.height + "x" + this.screenShot.height + "&location=" + this.screenShot.location + "&fov=" + this.screenShot.fov + "&heading=" + this.screenShot.heading + "&pitch=" + this.screenShot.pitch + "&key=" + this.googleMapsApiKey;
+    this.screenShot.shots.push(this.screenShot.url)
+    
+    if (this.screenShot.shots.length > 1) {
+      if (this.screenShot.url === this.screenShot.shots.slice(-2)[0]) console.log('same')
+    }
+    $(this.imageId).attr("src", this.screenShot.url);
+  }
+}
+
+var map = new googleMapWrapper('#img');
 $(document).ready(function(){
-  searchAddress();
-});
-// get value from input box, use google map api link
-function searchAddress(){
-  $("form").submit(function(e){
-    e.preventDefault();
-    var address= $("#place").val();
-    var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyCwLY1vDNFqYUY7eSj4kTVwiuW1-XZC55U";
-console.log("submitted",address,url);
-    
-  //get data and location geotag(longitude & lagitude) from the api 
-$.get( url, function( data ) {
- console.log(data.results[0].formatted_address,data.results[0].geometry.location);
-    fenway = data.results[0].geometry.location;
-  addMap();
-}); 
-});
-}
 
-//add/initialize map using the api script
-function addMap(){
-  var map = document.createElement('script');
-     map.type = 'text/javascript';
-     map.async = true;
-     map.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCwLY1vDNFqYUY7eSj4kTVwiuW1-XZC55U&callback=initialize';
-  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(map);
-}
-  
-//create map with the geotag (fenway) reveiced before
- function initialize() {
-        panorama = new google.maps.StreetViewPanorama(
-            document.getElementById('pano'), {
-              position: fenway
-         
+  $("form").submit(function (event) {
+    event.preventDefault();
+    var address = $('#place').val();
+    var url = map.googleApiGeocodeUrl + address + "&key=" + map.googleMapsApiKey;
+
+    //get data and location geotag(longitude & lagitude) from the api 
+    $.get(url, function (data) {
+      return map.assignPosition(data.results[0].geometry.location);
+    });
+  });
+
+  $("#game").click(function() {
+    map.takeScreenShot()
+    $("#go").attr("href", "gameboard.html?screenshot=" + map.screenShot.url);
+  });
 });
-
-// save the street view into an image with google image api link, while getting data for viewing angle
-   $("#game").click(function()
-{ 
-  var locations = window.panorama.position.lat()
-+","+window.panorama.position.lng()
-;
-  var zoomed = window.panorama.pov.zoom;
-  var k = Math.pow(0.5051, zoomed);// special equation for fov to zoom ratio
-  var fov = 103.7587 * k;
-  var headings = window.panorama.pov.heading;
-  var pitchs = window.panorama.pov.pitch;
-  var url= "https://maps.googleapis.com/maps/api/streetview?size=640x400&location="+locations+"&fov="+fov+"&heading="+headings+"&pitch="+pitchs+"&key=AIzaSyCwLY1vDNFqYUY7eSj4kTVwiuW1-XZC55U";
-  console.log(locations,fov, headings,pitchs,url);
-    $("#img").attr("src",url);
-    $("#go").attr("href","gameboard.html?location="+ url);//leading to the gameboard page
-    
-  
-});  
-
-}
