@@ -1,6 +1,20 @@
+/**
+ * This is a function that takes a str and a sperator ( also a string ),
+ * that strips a string with any sperator found in it.
+ * @param {string} str the given a string to transform
+ * @param {string} sep the sperator to find in the given string
+ * Ex:
+ * str = 'blahHEYblah';
+ * strip(str, 'blah'); // "HEY"
+ */
 function strip(str, sep) {
   return str.split(sep).join("")
 }
+
+/**
+ * This is a helper function that gets all of the search
+ * params in the current href given.
+ */
 window.location.getSearchParams = function (url) {
   var search = url || this.search;
   if (search.trim().length !== 0) {
@@ -19,27 +33,36 @@ window.location.getSearchParams = function (url) {
   return undefined
 }
 
+/**
+ * This gets the specfic search param in the href
+ */
 window.location.getSearchParam = function(name) {
   return this.getSearchParams()[name]
 }
 
-
+/**
+ * This is the canvase class that is just a wrapper/refactor of the previous code base.
+ */
 function canvas() {
-  // the canvas on the web page
+  // the canvas element on the web page
   this.canvasContext = $('#gameboard').get(0).getContext("2d")
   
-  // the canvas's offset
+  // the canvas's element offset
   this._canvasOffet = $('#gameboard').offset();
   
-  // the image being given by google MAP API
+  // the image being given by google MAP API in the href
   this.imageUrl = strip(location.search.slice(1).split('screenshot')[1], '%22').slice(1)
 
   // the color the pain brush is using
   this.color = '';
   
+  // some url
   this.brickwall = "https://s-media-cache-ak0.pinimg.com/736x/94/aa/66/94aa6684bdc152457d6983e58fd24bd2.jpg";
   
-  // places the image given on the canvas
+  /**
+   * This renders the image into the canvas and sets the
+   * hieght and with of the image.
+   */
   this.imageInput = function() {
     // new image
     var img = new Image();
@@ -57,6 +80,10 @@ function canvas() {
     img.height = "480px";
   }
   
+  /**
+   * This chnages the color of the paint brush
+   * @param {string} color The color choosen
+   */
   this.setColor = function(color) {
     switch (color) {
       case 'green':
@@ -74,20 +101,24 @@ function canvas() {
       default:
         if (!color) {
           throw new Error('color given was undefined.')
+          return;
         } else {
           console.log('color does not exist')
+          return;
         }
     }
   }
 
+  /**
+   * This this takes the the current clinet mouse x and y coordinates on the web page
+   * and gets the offset in order to draw to the canvas.
+   * This calcuates the radius of the brashes dialtion in size.
+   * @param {number} mouseX mouse x position
+   * @param {number} mouseY mouse y position
+   */
   this.draw = function(mouseX, mouseY) {
-    var left = mouseX - this._canvasOffet.left;
-    var top = mouseY - this._canvasOffet.top;
-    return this.drawCircle(left, top);
-  }
-
-  // x-axis and y-axis; draws circle at that position
-  this.drawCircle = function(x, y) {
+    var x = mouseX - this._canvasOffet.left;
+    var y = mouseY - this._canvasOffet.top;
     var end = Math.PI * 2;
     var radius = 5; // the size is the radius in pixels    
     var start = 0;
@@ -107,6 +138,7 @@ function canvas() {
     this.canvasContext.fill();
   }
 
+  // calls the method one the instance is made
   this.imageInput();
 }
 
@@ -119,7 +151,7 @@ $(document).ready(function(){
 
   $('.color').click(function () {
     var color = $(this).attr('id');
-    usersCanvas.setColor(color);
+    return usersCanvas.setColor(color);
   });
   
   $('#gameboard').mousemove(function (event) {
