@@ -8,7 +8,7 @@ function googleMapWrapper(imageId) {
   this.imageId = imageId;
 
   // google maps API key
-  // we should not expose this to people our app
+  // we should not expose this to people using our app
   this.googleMapsApiKey = 'AIzaSyCwLY1vDNFqYUY7eSj4kTVwiuW1-XZC55U';
   // url for google geocode api
   this.googleApiGeocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
@@ -20,7 +20,7 @@ function googleMapWrapper(imageId) {
 
   // This object holds all the information of the image and street given from the address
   this.screenShot = {
-    // the certain hieght width screenshot needed
+    // the desired height and width of the screenshot
     height: '640',
     width: '400',
 
@@ -38,7 +38,7 @@ function googleMapWrapper(imageId) {
   this.panorama;
   
   /**
-   * This gets the lat and lng coordinates and sets thet to the position property
+   * This gets the lat and lng coordinates and sets that to the position property
    * @param {object} position 
    */
   this.assignPosition = function(position) {
@@ -48,7 +48,7 @@ function googleMapWrapper(imageId) {
 
   /**
    * This creates script tag, loads, and renders the google maps panorama
-   * on the wbepage. which appends the script tag to the body of web page
+   * on the wbepage. which appends the script tag to the body of webpage
    */
   this.renderGoogleMap = function() {
     var googleMapScriptTag = document.createElement('script');
@@ -61,7 +61,7 @@ function googleMapWrapper(imageId) {
 
   /**
    * this starts the google Maps API to render.
-   * But this alsi sets some of the screenshot information
+   * But this also sets some of the screenshot information
    * to the screenshot object property.
    */
   this.initialize = function() {

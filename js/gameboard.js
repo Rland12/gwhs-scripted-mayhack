@@ -8,7 +8,7 @@
  * strip(str, 'blah'); // "HEY"
  */
 function strip(str, sep) {
-  return str.split(sep).join("")
+  return str.split(sep).join("");
 }
 
 /**
@@ -24,20 +24,20 @@ window.location.getSearchParams = function (url) {
     var searchObject = {};
     for (var i in splitSearchString) {
       var str = splitSearchString[i].split('=')
-      var name = str[0]
-      var value = str[1]
-      searchObject[name] = strip(value, "%22")
+      var name = str[0];
+      var value = str[1];
+      searchObject[name] = strip(value, "%22");
     }
-    return searchObject
+    return searchObject;
   }
-  return undefined
+  return undefined;
 }
 
 /**
  * This gets the specfic search param in the href
  */
 window.location.getSearchParam = function(name) {
-  return this.getSearchParams()[name]
+  return this.getSearchParams()[name];
 }
 
 /**
@@ -45,15 +45,15 @@ window.location.getSearchParam = function(name) {
  */
 function canvas() {
   // the canvas element on the web page
-  this.canvasContext = $('#gameboard').get(0).getContext("2d")
+  this.canvasContext = $('#gameboard').get(0).getContext("2d");
   
   // the canvas's element offset
   this._canvasOffet = $('#gameboard').offset();
   
   // the image being given by google MAP API in the href
-  this.imageUrl = strip(location.search.slice(1).split('screenshot')[1], '%22').slice(1)
+  this.imageUrl = strip(location.search.slice(1).split('screenshot')[1], '%22').slice(1);
 
-  // the color the pain brush is using
+  // the color the paint brush is using
   this.color = '';
   
   // some url
@@ -112,7 +112,7 @@ function canvas() {
   /**
    * This this takes the the current clinet mouse x and y coordinates on the web page
    * and gets the offset in order to draw to the canvas.
-   * This calcuates the radius of the brashes dialtion in size.
+   * This calcuates the radius of the brashes dilation in size.
    * @param {number} mouseX mouse x position
    * @param {number} mouseY mouse y position
    */
@@ -129,16 +129,16 @@ function canvas() {
       return false;
     }
 
-    // shape that your drawing
+    // the shape that your drawing
     this.canvasContext.beginPath();
     this.canvasContext.arc(x, y, radius, start, end);
-    //calling the varible to the colors
+    //calling the variable to the colors
     this.canvasContext.fillStyle = this.color;
     // filling the circles 
     this.canvasContext.fill();
   }
 
-  // calls the method one the instance is made
+  // calls the method once the instance is made
   this.imageInput();
 }
 
