@@ -1,110 +1,157 @@
+/**
+ * This is a function that takes a str and a sperator ( also a string ),
+ * that strips a string with any sperator found in it.
+ * @param {string} str the given a string to transform
+ * @param {string} sep the sperator to find in the given string
+ * Ex:
+ * str = 'blahHEYblah';
+ * strip(str, 'blah'); // "HEY"
+ */
+function strip(str, sep) {
+  return str.split(sep).join("");
+}
+
+/**
+ * This is a helper function that gets all of the search
+ * params in the current href given.
+ */
+window.location.getSearchParams = function (url) {
+  var search = url || this.search;
+  if (search.trim().length !== 0) {
+    search = search.slice(1);    
+    var splitSearchString = search.split('&');
+
+    var searchObject = {};
+    for (var i in splitSearchString) {
+      var str = splitSearchString[i].split('=')
+      var name = str[0];
+      var value = str[1];
+      searchObject[name] = strip(value, "%22");
+    }
+    return searchObject;
+  }
+  return undefined;
+}
+
+/**
+ * This gets the specfic search param in the href
+ */
+window.location.getSearchParam = function(name) {
+  return this.getSearchParams()[name];
+}
+
+/**
+ * This is the canvase class that is just a wrapper/refactor of the previous code base.
+ */
+function canvas() {
+  // the canvas element on the web page
+  this.canvasContext = $('#gameboard').get(0).getContext("2d");
+  
+  // the canvas's element offset
+  this._canvasOffet = $('#gameboard').offset();
+  
+  // the image being given by google MAP API in the href
+  this.imageUrl = strip(location.search.slice(1).split('screenshot')[1], '%22').slice(1);
+
+  // the color the paint brush is using
+  this.color = '';
+  
+  /**
+   * This renders the image into the canvas and sets the
+   * hieght and with of the image.
+   */
+  this.imageInput = function() {
+    // new image
+    var img = new Image();
+    var context = this.canvasContext;
+
+    // upon image loading 
+    img.onload = function () {
+      // positioning and draw the image 
+      context.drawImage(img, 0, 0);
+    };
+    // setting the empty image to an image 
+    img.src = this.imageUrl;
+    //prevents the image from stretching out 
+    img.width = "640px";
+    img.height = "480px";
+  }
+  
+  /**
+   * This chnages the color of the paint brush
+   * @param {string} color The color choosen
+   */
+  this.setColor = function(color) {
+    switch (color) {
+      case 'green':
+        this.color = "#009933";
+        break;
+      case 'red':
+        this.color = "#ff0000";
+        break;
+      case 'blue':
+        this.color = "#0000ff";
+        break;
+      case 'yellow':
+        this.color = "#ffff00";
+        break;
+      default:
+        if (!color) {
+          throw new Error('color given was undefined.')
+          return;
+        } else {
+          console.log('color does not exist')
+          return;
+        }
+    }
+  }
+
+  /**
+   * This this takes the the current clinet mouse x and y coordinates on the web page
+   * and gets the offset in order to draw to the canvas.
+   * This calcuates the radius of the brashes dilation in size.
+   * @param {number} mouseX mouse x position
+   * @param {number} mouseY mouse y position
+   */
+  this.draw = function(mouseX, mouseY) {
+    var x = mouseX - this._canvasOffet.left;
+    var y = mouseY - this._canvasOffet.top;
+    var end = Math.PI * 2;
+    var radius = 5; // the size is the radius in pixels    
+    var start = 0;
+
+    // if x & y doesnt exist, get out of the function
+    if (!x || !y) {
+      console.log("x: ", x, "y: ", y);
+      return false;
+    }
+
+    // the shape that your drawing
+    this.canvasContext.beginPath();
+    this.canvasContext.arc(x, y, radius, start, end);
+    //calling the variable to the colors
+    this.canvasContext.fillStyle = this.color;
+    // filling the circles 
+    this.canvasContext.fill();
+  }
+
+  // calls the method once the instance is made
+  this.imageInput();
+}
+
 $(document).ready(function(){
-  $('#share').click(function(){
-    $('#media').show();
+  var usersCanvas = new canvas();
+
+  // $('#share').click(function(){
+  //   $('#media').show();
+  // });
+
+  $('.color').click(function () {
+    var color = $(this).attr('id');
+    return usersCanvas.setColor(color);
   });
-  $('#red').click(function(){
-    $('body').attr("class","redspraycan"); 
-  setRed();
+  
+  $('#gameboard').mousemove(function (event) {
+    return usersCanvas.draw(event.pageX, event.pageY);
   });
-  $('#blue').click(function(){
-    $('body').attr("class","bluespraycan"); 
-  setBlue();
-  });
-  $('#yellow').click(function(){
-    $('body').attr("class","yellowspraycan"); 
-  setYellow();
-  });
-  $('#green').click(function(){
-    $('body').attr("class","greenspraycan"); 
-  setGreen();
-  });
-  var url = window.location.href;
-console.log(url);
-var index = url.indexOf("=");
-var img = url.substring(index+1);
-console.log(img);
-  // variable for the canvas 
-var gameboard = getCanvas();
-// variable for the image url 
-var brickwall = "https://s-media-cache-ak0.pinimg.com/736x/94/aa/66/94aa6684bdc152457d6983e58fd24bd2.jpg";
-imageInput (img, gameboard);
-drawing ();
 });
-//START OF DRAWING CODE
-//returning a new image
-function getImage (){
-  return new Image();
-}
-
-// select your first gameboard
-function getCanvas (){ 
-  var canvas = $('#gameboard').get(0);
-  return canvas;
-}
-
-// places the image given on the canvas
-function imageInput (imageUrl, canvas){
-  // centext is 2 dimentional 
-  var context =  canvas.getContext('2d');
-  // new image
-  var myImage = getImage();
-  // upon image loading 
-  myImage.onload = function() {
-    // positioning and draw the image 
-    context.drawImage(myImage,0,0);
-  };  
-  // setting the empty image to an image 
-  myImage.src = imageUrl;
-  //prevents the image from stretching out 
-  myImage.width = "640px";
-  myImage.height = "480px";
-}
-// creating a variable that all the functions can get to
-var color;
-// just turn it red
-function setRed(){
- color = "#ff0000";
-}
-// just turn it green 
-function setGreen(){
-  color = "#009933";
-}
-// just turn it blue
-function setBlue(){
-  color = "#0000ff";
-}
-// just turn it yellow
-function setYellow(){
-  color = "#ffff00";
-}
-// x-axis and y-axis; draws circle at that position
-function drawCircle(x, y){
-  // if x & y doesnt exist, get out of the function
-  if (! x || ! y){
-    console.log("Don't know where to go.");
-    return false;
-  } 
-  // canvas into the variable target
-  var target = getCanvas();
-  // assinging 2d to context 
-  var context = target.getContext("2d");
-  // shape that your drawing
-  context.beginPath();
-  var radius = 5; // the size is the radius in pixels    
-  var start = 0; 
-  var end = Math.PI*2;
-  context.arc(x, y, radius, start, end);
-  //calling the varible to the colors
-  context.fillStyle = color;
-  // filling the circles 
-  context.fill();
-}
-//
-function drawing (){
-$('#gameboard').mousemove(function(event){
-  var offset = $("#gameboard").offset();
-  var left = event.pageX - offset.left;
-  var top = event.pageY - offset.top;
-  drawCircle(left, top);
-    });
-}
