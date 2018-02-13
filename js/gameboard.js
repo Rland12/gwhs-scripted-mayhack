@@ -56,9 +56,6 @@ function canvas() {
   // the color the paint brush is using
   this.color = '';
   
-  // some url
-  this.brickwall = "https://s-media-cache-ak0.pinimg.com/736x/94/aa/66/94aa6684bdc152457d6983e58fd24bd2.jpg";
-  
   /**
    * This renders the image into the canvas and sets the
    * hieght and with of the image.
